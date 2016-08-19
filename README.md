@@ -1,15 +1,13 @@
 # How to reproduce
 
-On Desktop.
+* Be on Desktop.
 
-1) Load `index.html` in Chrome.
+* Load `index.html` in Chrome.
 
-2) Open console.
+* Open console.
 
-3) Notice that "Discrepancy {n}" prints in console. Variations between -3 and 3 is expected.
+* Toggle Device toolbar and make sure you have a device that simulates "touch", for example (iPhone 6).
 
-4) Toggle Device toolbar and make sure you have a device that simulates "touch", for example (iPhone 6).
+* "Touch" document by clicking mouse.
 
-5) "Touch" document by clicking mouse.
-
-6) Notice how discrepancy increases to up to 150.
+* Notice how a deferred call never occurs before a 100 ms delay or when touchend is triggered.
