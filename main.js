@@ -1,14 +1,12 @@
-function handleTouch(event) {
+let last;
+
+function log() {
+  console.log('Delay', Date.now() - last);
 }
 
-document.addEventListener('touchstart', handleTouch);
-
-const interval = 100;
-let last = Date.now();
-function callback() {
-  const next = Date.now();
-  console.log('Discrepancy', interval - (next - last));
-  last = next;
+function handler() {
+  last = Date.now();
+  setTimeout(log, 0);
 }
 
-setInterval(callback, interval);
+document.addEventListener('touchstart', handler);
