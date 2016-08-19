@@ -4,7 +4,7 @@
 
 * Load `index.html` in Chrome.
 
-* Open console.
+* Open Developer Tools.
 
 * Toggle Device toolbar and make sure you have a device that simulates "touch", for example (iPhone 6).
 
