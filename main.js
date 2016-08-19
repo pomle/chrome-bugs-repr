@@ -1,12 +1,14 @@
-let last;
+function handler(name) {
+  let last;
 
-function log() {
-  console.log('Delay', Date.now() - last);
+  function log() {
+    console.log('Delay', name, performance.now() - last);
+  }
+
+  return function(e) {
+    last = performance.now();
+    setTimeout(log, 0);
+  }
 }
 
-function handler() {
-  last = Date.now();
-  setTimeout(log, 0);
-}
-
-document.addEventListener('touchstart', handler);
+document.addEventListener('touchstart', handler('touchstart'));
