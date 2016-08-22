@@ -7,7 +7,7 @@ function handler(name) {
 
   return function(e) {
     last = performance.now();
-    setTimeout(log, 0);
+    fetch('./index.html').then(response => log());
   }
 }
 
