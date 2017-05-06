@@ -13,3 +13,6 @@
 or
 
 2) Trigger `touchstart` + `touchend` by clicking quick with left mouse button on document. Notice how the deferred call occurs immediately on ´touchend`.
+
+
+This bug was filed at https://bugs.chromium.org/p/chromium/issues/detail?id=639300
