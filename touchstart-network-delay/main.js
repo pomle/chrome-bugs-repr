@@ -38,8 +38,8 @@ function sender() {
       }
     }
 
-    document.addEventListener('mousedown', sender('mousedown'));
     document.addEventListener('touchstart', sender('touchstart'));
+    document.addEventListener('touchend', sender('touchend'));
   });
 }
 
