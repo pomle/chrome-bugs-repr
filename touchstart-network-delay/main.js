@@ -1,33 +1,50 @@
-window.addEventListener('load', function() {
-  const API_KEY = 'lwjd5qra8257b9';
-  let id;
+const ROLE = window.location.hash;
 
-  function receiver() {
-    const peer = new Peer({key: API_KEY});
-    peer.on('open', function(_id) {
-      id = _id;
-      console.log(id);
-      sender();
-      peer.on('connection', function(conn) {
-        conn.on('data', function(data) {
-          console.log(data);
-        });
+const API_KEY = 'lwjd5qra8257b9';
+const ID = 'k5lxg3tixtq8semi';
+
+function time() {
+  return (new Date()).getTime();
+}
+
+function receiver() {
+  const peer = new Peer(ID, {key: API_KEY});
+  peer.on('open', function() {
+    peer.on('connection', function(conn) {
+      conn.on('data', function(json) {
+        const data = JSON.parse(json);
+        console.log('Label', data.label, 'Diff', time() - data.time);
       });
     });
-  }
+  });
+}
 
-  function sender() {
-    const peer = new Peer({key: API_KEY});
-    const conn = peer.connect(id);
-    conn.on('open', function() {
-      console.info('Connection established on channel "%s"', id);
+function sender() {
+  const peer = new Peer({key: API_KEY});
+  const conn = peer.connect(ID);
+  conn.on('open', function() {
+    console.info('Connection established on channel "%s"', ID);
 
-      conn.on('data', function(data) {
-        console.info('Received', data);
-      });
-      conn.send('Hello!');
+    conn.on('data', function(data) {
+      console.info('Received', data);
     });
-  }
 
+    function sender(label) {
+      return function send() {
+        conn.send(JSON.stringify({
+          label,
+          time: time(),
+        }));
+      }
+    }
+
+    document.addEventListener('mousedown', sender('mousedown'));
+    document.addEventListener('touchstart', sender('touchstart'));
+  });
+}
+
+if (ROLE === '#sender') {
+  sender();
+} else {
   receiver();
-});
+}
